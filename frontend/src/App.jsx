@@ -7,9 +7,12 @@ import LoginPage from './pages/loginPage'
 import ProfilePage from './pages/ProfilePage'
 import SignUpPage from './pages/SignUpPage'
 import { axiosInstance } from './lib/axios'
+import { useAuthStore } from './store/useAuthStore'
 
 const App = () => {
+  const {authUser} = useAuthStore
 
+  
   return (
     <div>
       
