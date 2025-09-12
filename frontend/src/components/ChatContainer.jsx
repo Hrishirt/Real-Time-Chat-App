@@ -5,13 +5,17 @@ import ChatHeader from './ChatHeader';
 import MessageInput from './MessageInput'
 import MessageSkeleton from './skeletons/MessageSkeleton';
 import { useAuthStore } from '../store/useAuthStore';
+import { formatMessageTime } from '../lib/utils';
 const ChatContainer = () => {
-  const {messages, getMessages, isMessagesLoading, selectedUser} = useChatStore()
+  const {messages, getMessages, isMessagesLoading, selectedUser, subscribeToMessages, unsubscribeFromMessages} = useChatStore()
   const {authUser} = useAuthStore()
 
   useEffect(() => {
-    getMessages(selectedUser._id)
-  },[selectedUser._id, getMessages])
+    getMessages(selectedUser._id);
+    subscribeToMessages();
+
+    return () => unsubscribeFromMessages(); 
+  },[selectedUser._id, getMessages, subscribeToMessages, unsubscribeFromMessages])
 
   if(isMessagesLoading){ return (
     <div className='flex-1 flex flex-col overflow-auto'>
@@ -42,11 +46,18 @@ const ChatContainer = () => {
                 </div>
               </div> 
             <div className='chat-header mb-1'>
-              <time className='text-xs opacity-50 ml-1'>{message.createdAt}</time>
+              <time className='text-xs opacity-50 ml-1'>{formatMessageTime(message.createdAt)}</time>
             </div>
 
-            <div className='chat-bubble flex'>
-
+            <div className='chat-bubble flex flex-col'>
+              {message.image && (
+                <img
+                  src={message.image}
+                  alt="Attachment"
+                  className="sm:max-w-[200px] rounded-md mb-2"
+                />
+              )}
+              {message.text && <p>{message.text}</p>}
             </div>
           </div>
         ))}
