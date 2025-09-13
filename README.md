@@ -1,32 +1,97 @@
-NexusChat
-A real-time messaging application that lets you chat with friends, create groups, and share images - all with end-to-end encryption for privacy.
-![Live Demo]([https://img.shields.io/badge/Live%20Demo-View%20App-blue](https://real-time-chat-app-maew.onrender.com/))
-What it does
-NexusChat is a WhatsApp-style messaging app where you can:
-Send messages instantly to friends
-Search for new people to chat with
-Create group conversations
-Share images and photos
-See who's online in real-time
-Keep your messages private with encryption
-How it works
-Frontend: Built with React and styled with Tailwind CSS. The app automatically encrypts your messages before sending them, so only you and the person you're chatting with can read them.
-Backend: Runs on Node.js with Express, uses MongoDB to store messages and user data, and Socket.io to make everything happen in real-time.
-Security: Messages are encrypted on your device before they're sent, so even if someone could access the database, they couldn't read your conversations.
-Getting started
-Clone the repository
-Install dependencies: npm install (both frontend and backend folders)
-Set up your environment variables (MongoDB connection, JWT secret, etc.)
-Run the backend: npm run dev in the backend folder
-Run the frontend: npm run dev in the frontend folder
-Open your browser and start chatting
-What I learned building this
-This project taught me how to build a complete application from scratch. I learned how to handle real-time data with WebSockets, implement proper authentication, and manage state across a React application. The encryption part was interesting - I had to figure out how to encrypt messages on the client side without breaking the user experience.
-Working with Socket.io was challenging at first, especially getting the online/offline status to work correctly. I also learned a lot about database design and how to structure chat data efficiently.
-The most rewarding part was seeing everything come together - when you send a message and it appears instantly on the other person's screen, it feels like magic even though you know exactly how it works.
-Tech stack
-Frontend: React, Tailwind CSS, Zustand, Socket.io Client
-Backend: Node.js, Express, Socket.io, MongoDB, Mongoose
-Security: JWT authentication, bcrypt password hashing, AES encryption
-Deployment: Render (backend), Vercel/Netlify (frontend)
-Built as a learning project to understand real-time web applications and modern web development practices.
+# NexusChat
+
+A real-time messaging application that lets you chat with friends, create groups, and share images — all with end-to-end encryption for privacy and security.
+
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Click%20Here-blue)](https://real-time-chat-app-maew.onrender.com/login)
+
+---
+
+## Features
+
+- Real-time chat with instant message delivery
+- User search and group chat creation
+- Image sharing with Cloudinary integration
+- User presence tracking (online/offline)
+- End-to-end AES encryption on all messages
+
+---
+
+## Tech Stack
+
+**Frontend**
+- React 19 with Vite
+- Tailwind CSS and DaisyUI
+- Zustand for state management
+- Socket.io client
+- Crypto-JS (AES encryption)
+
+**Backend**
+- Node.js and Express
+- MongoDB with Mongoose
+- Socket.io for real-time engine
+- JWT-based authentication
+- bcrypt for password hashing
+- Cloudinary for image uploads
+
+**Deployment**
+- Frontend: Vercel / Netlify
+- Backend: Render
+
+---
+
+## Security
+
+- End-to-end encryption using AES (via Crypto-JS)
+- JWT tokens stored securely in HTTP-only cookies
+- Passwords hashed with bcrypt
+- CORS configuration, input validation, and custom error handling
+
+---
+
+## Getting Started
+
+```bash
+# Clone the repository
+git clone https://github.com/Hrishirt/Real-Time-Chat-App.git
+cd Real-Time-Chat-App
+
+# Install backend dependencies
+cd backend
+npm install
+
+# Create a `.env` file with:
+# MONGO_URI=
+# JWT_SECRET=
+# CLOUDINARY_CLOUD_NAME=
+# CLOUDINARY_API_KEY=
+# CLOUDINARY_API_SECRET=
+
+# Start backend
+npm run dev
+
+# In a new terminal window, start frontend
+cd ../frontend
+npm install
+npm run dev
+```
+
+Visit [http://localhost:5173](http://localhost:5173) in your browser.
+
+---
+
+## What I Learned
+
+This project helped me understand how to build a complete real-time web application from scratch. I learned how to:
+
+- Build secure authentication flows using JWT and bcrypt
+- Implement real-time functionality using Socket.io
+- Manage application state efficiently with Zustand
+- Encrypt messages client-side and store them securely
+- Structure a full-stack app with modular design and proper error handling
+- Integrate image uploads and CDN delivery with Cloudinary
+
+---
+
+## Repository
+
+GitHub: [https://github.com/Hrishirt/Real-Time-Chat-App](https://github.com/Hrishirt/Real-Time-Chat-App)
