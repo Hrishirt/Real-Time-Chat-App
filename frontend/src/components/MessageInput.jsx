@@ -1,7 +1,8 @@
 import { useRef, useState } from "react";
 import { useChatStore } from "../store/useChatStore";
-import { Image, Send, X } from "lucide-react";
+import { Image, Send, X, Shield } from "lucide-react";
 import toast from "react-hot-toast";
+import { encryptMessage } from "../lib/encryption";
 
 const MessageInput = () => {
   const [text, setText] = useState("");
@@ -33,8 +34,11 @@ const MessageInput = () => {
     if (!text.trim() && !imagePreview) return;
 
     try {
+      // Encrypt the message text before sending
+      const encryptedText = text.trim() ? encryptMessage(text.trim()) : "";
+      
       await sendMessage({
-        text: text.trim(),
+        text: encryptedText,
         image: imagePreview,
       });
 
@@ -71,13 +75,18 @@ const MessageInput = () => {
 
       <form onSubmit={handleSendMessage} className="flex items-center gap-2">
         <div className="flex-1 flex gap-2">
-          <input
-            type="text"
-            className="w-full input input-bordered rounded-lg input-sm sm:input-md"
-            placeholder="Type a message..."
-            value={text}
-            onChange={(e) => setText(e.target.value)}
-          />
+          <div className="relative flex-1">
+            <input
+              type="text"
+              className="w-full input input-bordered rounded-lg input-sm sm:input-md pr-10"
+              placeholder="Type a message..."
+              value={text}
+              onChange={(e) => setText(e.target.value)}
+            />
+            <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
+              <Shield className="w-4 h-4 text-green-500" title="End-to-End Encrypted" />
+            </div>
+          </div>
           <input
             type="file"
             accept="image/*"

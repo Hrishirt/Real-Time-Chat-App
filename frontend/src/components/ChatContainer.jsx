@@ -6,6 +6,7 @@ import MessageInput from './MessageInput'
 import MessageSkeleton from './skeletons/MessageSkeleton';
 import { useAuthStore } from '../store/useAuthStore';
 import { formatMessageTime } from '../lib/utils';
+import { decryptMessage, isEncrypted } from '../lib/encryption';
 const ChatContainer = () => {
   const {messages, getMessages, isMessagesLoading, selectedUser, subscribeToMessages, unsubscribeFromMessages} = useChatStore()
   const {authUser} = useAuthStore()
@@ -65,7 +66,11 @@ const ChatContainer = () => {
                   className="sm:max-w-[200px] rounded-md mb-2"
                 />
               )}
-              {message.text && <p>{message.text}</p>}
+              {message.text && (
+                <p>
+                  {isEncrypted(message.text) ? decryptMessage(message.text) : message.text}
+                </p>
+              )}
             </div>
           </div>
         ))}
